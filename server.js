@@ -1,11 +1,10 @@
 const express = require("express");
-const ejs = require("ejs");
 // const bodyParser = require("body-parser");
 const controller = require("./controller/app.js");
 
 const app = express();
 
-app.set("views engine", "ejs");
+app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/pulic"));
 
 controller.blogController(app);
