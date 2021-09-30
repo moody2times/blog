@@ -1,5 +1,10 @@
 const express = require("express");
 // const bodyParser = require("body-parser");
+const { MongoClient } = require("mongodb");
+
+const url = "mongodb://localhost:27017";
+const client = new MongoClient(url);
+
 const controller = require("./controller/app.js").blogController;
 
 const app = express();
