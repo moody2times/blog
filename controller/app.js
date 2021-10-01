@@ -26,7 +26,14 @@ const blogController = (app) => {
 			age,
 		};
 
-		const post = schema.validate(document);
+		const { value: post, error } = schema.validate(document);
+		if (error) {
+			const {
+				details: [{ message }],
+			} = error;
+			res.send(message);
+			return;
+		}
 
 		posts.insertOne(post, (err, result) => {
 			if (err) {
