@@ -2,6 +2,13 @@ const uniqid = require("uniqid");
 const Joi = require("joi");
 const { posts } = require("../db/db");
 
+const schema = Joi.object({
+	_id: Joi.any(),
+	name: Joi.string().required(),
+	skill: Joi.string().required(),
+	age: Joi.number().required(),
+});
+
 const blogController = (app) => {
 	app.get("/", (req, res) => {
 		//handle request and response
@@ -19,7 +26,9 @@ const blogController = (app) => {
 			age,
 		};
 
-		posts.insertOne(document, (err, result) => {
+		const post = schema.validate(document);
+
+		posts.insertOne(post, (err, result) => {
 			if (err) {
 				console.log(err.message);
 				return;
@@ -29,6 +38,18 @@ const blogController = (app) => {
 					Inserted one document with ${result.insertedId} successfully
 				</h4>`
 			);
+		});
+	});
+
+	app.delete("/blog/:id", (req, res) => {
+		const id = req.params.id;
+
+		posts.deleteOne({ _id: id }, (err, result) => {
+			if (err) {
+				console.log(err.message);
+				return;
+			}
+			res.send(`Deleted one document with the id: ${result.insertedId}`);
 		});
 	});
 };
