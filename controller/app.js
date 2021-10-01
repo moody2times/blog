@@ -10,7 +10,7 @@ const blogController = (app) => {
 
 	app.post("/blog", (req, res) => {
 		const _id = uniqid();
-		const { name, skill } = req.body;
+		const { name, skill, age } = req.body;
 
 		const document = {
 			_id,
