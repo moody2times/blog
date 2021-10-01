@@ -48,17 +48,34 @@ const blogController = (app) => {
 		});
 	});
 
-	app.delete("/blog/:id", (req, res) => {
-		const id = req.params.id;
+	app.route("/blog/:id")
+		.put((req, res) => {
+			const id = req.params.id;
+			const updateData = req.body;
+			posts.findOneAndUpdate(
+				{ _id: id },
+				{ $set: updateData },
+				(err, result) => {
+					if (err) {
+						console.log(err.message);
+						res.end();
+					}
+					const updatedDoc = JSON.stringify(result.value);
+					res.send(`Successfully updated ${updatedDoc}`);
+				}
+			);
+		})
+		.delete((req, res) => {
+			const id = req.params.id;
 
-		posts.deleteOne({ _id: id }, (err, result) => {
-			if (err) {
-				console.log(err.message);
-				return;
-			}
-			res.send(`Deleted one document with the id: ${result.insertedId}`);
+			posts.deleteOne({ _id: id }, (err, result) => {
+				if (err) {
+					console.log(err.message);
+					return;
+				}
+				res.send(`Deleted one document with the id: ${result.insertedId}`);
+			});
 		});
-	});
 };
 
 module.exports = { blogController };
