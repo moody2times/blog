@@ -8,4 +8,4 @@ client.connect();
 const db = client.db(dbName);
 const posts = db.collection("posts");
 
-posts.insertOne({ author: "Naomi Mudiaga" });
+module.exports = { posts };
