@@ -5,7 +5,7 @@ const { blogController } = require("./controller/app.js");
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/pulic"));
 
 blogController(app);
