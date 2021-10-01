@@ -5,19 +5,4 @@ const blogController = (app) => {
 	});
 };
 
-const dbClient = async (client) => {
-	const dbName = "blogDB";
-	try {
-		await client.connect();
-		const db = client.db(dbName);
-		const posts = db.collection("posts");
-		await posts.insertOne({ author: "Naomi Mudiaga" });
-		console.log("insert document successful!");
-	} catch (err) {
-		console.log(err.message);
-	} finally {
-		client.close();
-	}
-};
-
-module.exports = { blogController, dbClient };
+module.exports = { blogController };
