@@ -2,7 +2,8 @@
 
 </br>
 <h2>Moody_by_Nature</h2>
-This is a blog web app that is still under construction. 
+A blog web app for Moody_by_Nature under construction. 
+</br>
 </br>
 <h3>Tech Stack and Tools</h3>
 <ul>
